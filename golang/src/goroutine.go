@@ -23,7 +23,7 @@ func g(n int) {
 }
 
 func main() {
-	go f(0)
+    go f(0)
 	go g(0)
 	var input string
 	fmt.Scanln(&input)
