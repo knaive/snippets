@@ -1,44 +1,34 @@
-package selectTest
+package main
 
 import (
-	"fmt"
-	"time"
+    "time"
+    "fmt"
 )
 
 func main() {
-	c1 := make(chan string)
-	c2 := make(chan string)
+    c1 := make(chan string, 1)
+    go func() {
+        time.Sleep(time.Second*2)
+        c1 <- "result 1"
+    }()
 
-	go func() {
-		for {
-			c1 <- "from 1"
-			time.Sleep(time.Second * 4)
-		}
-	}()
+    select {
+    case res := <-c1:
+        fmt.Println(res)
+    case <- time.After(time.Second*1):
+        fmt.Println("timeout 1")
+    }
 
-	go func() {
-		for {
-			c2 <- "from 2"
-			time.Sleep(time.Second * 6)
-		}
-	}()
+    c2 := make(chan string, 1)
+    go func() {
+        time.Sleep(time.Second*2)
+        c2 <- "result 2"
+    }()
 
-	go func() {
-		for {
-			select {
-			case msg1 := <-c1:
-				fmt.Println(msg1)
-			case msg2 := <-c2:
-				fmt.Println(msg2)
-			case <-time.After(time.Second * 2):
-				fmt.Println("timeout")
-				// default:
-				// 	fmt.Println("None match")
-			}
-			time.Sleep(time.Second)
-		}
-	}()
-
-	var input string
-	fmt.Scanln(&input)
+    select {
+    case res := <-c2:
+        fmt.Println(res)
+        case <-time.After(time.Second*3):
+            fmt.Println("timeout 2")
+    }
 }

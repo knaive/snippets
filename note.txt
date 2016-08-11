@@ -1,0 +1,16 @@
+var ...int 
+func someFunction(a, b int)
+
+// slice
+// slice header : start, length and capacity
+var slice []int
+
+// array
+var arr [4]int
+
+make(ch chan int)
+make(ch chan int, 3)
+make([]int, 4, 10)
+
+type xx interface{}
+xx.(string)
