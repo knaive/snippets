@@ -1,3 +1,6 @@
 *.a
 *.exe
 *.out
+*.class
+*.pyc
+*.dll
