@@ -1,5 +1,6 @@
 import demo.maths._
 import demo.matcher._
+import demo.util._
 
 object Runner {
     def main(args: Array[String]) = {
@@ -29,5 +30,8 @@ object Runner {
         println("The manufacturer of the phone %s is %s".format(phone.toString(), getProducer(phone)))
         println("The manufacturer of the phone %s is %s".format(phone1, getProducer(phone1)))
         println("The manufacturer of the phone %s is %s".format(phone2, getProducer(phone2)))
+
+
+        println("Factorial(5): " + Maths.factorial(5))
     }
 }
